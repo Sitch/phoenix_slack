@@ -16,6 +16,7 @@ defmodule Phoenix.Slack do
     end
     layout = Keyword.get(opts, :layout)
     quote bind_quoted: [view: view, layout: layout] do
+      alias Phoenix.Slack.ChannelMessage
       import Phoenix.Slack.ChannelMessage
       import Phoenix.Slack, except: [render_body: 3]
 
