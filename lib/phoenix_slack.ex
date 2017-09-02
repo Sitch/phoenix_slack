@@ -28,6 +28,15 @@ defmodule Phoenix.Slack do
         |> put_new_view(@view)
         |> Phoenix.Slack.render_body(template, assigns)
       end
+
+      def local_text_template(), do: local_module_name() <> ".text"
+      
+      defp local_module_name() do
+        __MODULE__
+        |> Module.split
+        |> List.last
+        |> Macro.underscore
+      end
     end
   end
 
