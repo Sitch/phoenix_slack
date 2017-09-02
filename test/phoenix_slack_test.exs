@@ -16,6 +16,8 @@ defmodule Phoenix.SlackTest do
   defmodule TestMessage do
     use Phoenix.Slack, view: MessageView
 
+    def welcome_local_text_template(), do: local_text_template()
+
     def welcome_text(), do: message() |> render_body("welcome.text", %{})
 
     def welcome_text_assigns(), do: message() |> render_body("welcome_assigns.text", %{name: "Tony"})
@@ -134,6 +136,10 @@ defmodule Phoenix.SlackTest do
   test "macro: render text body with layout and assigns" do
     assert %ChannelMessage{text_body: "TEXT: Welcome, Tony!\r\n\r\n"} =
            TestMessage.welcome_text_layout_assigns()
+  end
+
+  test "local_text_template" do
+    assert TestMessage.welcome_local_text_template() == "test_message.text"
   end
 
   test "put_layout/2", %{message: message} do
